@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"net/http/httptest"
+	"os"
 
 	log "github.com/sirupsen/logrus"
 
@@ -11,8 +12,6 @@ import (
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
 )
-
-const localServerBaseUrl = "http://localhost:8080"
 
 // world stores the state of a particular scenario
 var world struct {
@@ -24,6 +23,12 @@ var world struct {
 }
 
 func thereIsAClient() error {
+
+	var localServerBaseUrl = os.Getenv("BASE_URL")
+	if localServerBaseUrl == "" {
+		localServerBaseUrl = "http://localhost:8080"
+	}
+
 	world.client = NewClient(localServerBaseUrl)
 	return nil
 }
@@ -212,8 +217,11 @@ func deleteAccountIsCalledForANonexistingAccount() error {
 
 func InitializeScenario(ctx *godog.ScenarioContext) {
 
-	//log.SetLevel(log.DebugLevel)
-	log.SetLevel(log.FatalLevel)
+	if logLevel := os.Getenv("LOG_LEVEL"); logLevel == "DEBUG" {
+		log.SetLevel(log.DebugLevel)
+	} else {
+		log.SetLevel(log.FatalLevel)
+	}
 
 	ctx.AfterScenario(func(sc *godog.Scenario, err error) {
 		if world.mockServer != nil {

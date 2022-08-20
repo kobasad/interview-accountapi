@@ -161,3 +161,5 @@ func toError(resp *http.Response) error {
 
 	return errors.New("Request to Account API failed")
 }
+
+func main() {}
