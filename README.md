@@ -14,6 +14,8 @@ Tests are executed using `docker-compose`, the docker image containing the solut
 Detailed logs can be enabled by setting `LOG_LEVEL` environment variable to `DEBUG`.
 
 # Potential Improvements
-- Test coverage could be improved by supplying test data via tables instead of code-defined test data.
-- In order to be production-ready, the solution should include monitoring capabilities
-- `http.Client` could be reused among all instances of `ApiClient` in order to optimize performance.
+- Test coverage could be improved by supplying test data via tables instead of code-defined test data
+- Marshaling and read/write error handling should be done similarly to other errors: return custom error constant for each case
+- In order to be production-ready, the solution should include monitoring capabilities and other quality attributes
+- `http.Client` could be reused among all instances of `ApiClient` in order to optimize performance
+- async client?

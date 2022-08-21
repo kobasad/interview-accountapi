@@ -145,11 +145,17 @@ func read(resp *http.Response) ([]byte, error) {
 	return body, nil
 }
 
+var okStatuses = map[int]int{
+	http.StatusOK:        1,
+	http.StatusAccepted:  1,
+	http.StatusNoContent: 1,
+	http.StatusCreated:   1,
+}
+
 // Converts execution errors into meaningful client errors
 func toError(resp *http.Response) error {
-
 	switch statusCode := resp.StatusCode; {
-	case statusCode == http.StatusOK || statusCode == http.StatusAccepted || statusCode == http.StatusNoContent || statusCode == http.StatusCreated:
+	case okStatuses[statusCode] == 1:
 		return nil
 	case statusCode == http.StatusNotFound:
 		return ErrNotFound
