@@ -19,3 +19,4 @@ Detailed logs can be enabled by setting `LOG_LEVEL` environment variable to `DEB
 - In order to be production-ready, the solution should include monitoring capabilities and other quality attributes
 - `http.Client` could be reused among all instances of `ApiClient` in order to optimize performance
 - async client
+- extract `HttpClient`, `Marshaler`, `Reader` interfaces maybe
