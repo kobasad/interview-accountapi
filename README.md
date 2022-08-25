@@ -14,7 +14,6 @@ Tests are executed using `docker-compose`, the docker image containing the solut
 Detailed logs can be enabled by setting `LOG_LEVEL` environment variable to `DEBUG`.
 
 # Potential Improvements
-- Input validation
 - Test coverage could be improved by supplying test data via tables instead of code-defined test data
 - Marshaling and read/write error handling should be done similarly to other errors: return custom error constant for each case
 - In order to be production-ready, the solution should include monitoring capabilities and other quality attributes
